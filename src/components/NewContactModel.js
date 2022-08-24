@@ -1,9 +1,8 @@
-import React,{useRef} from 'react'
-import { Form, Modal,Button } from 'react-bootstrap'
-import {useContacts} from '../contexts/ContactsProvider'
+import React, { useRef } from 'react';
+import { Form, Modal, Button } from 'react-bootstrap';
+import { useContacts } from '../contexts/ContactsProvider';
 
 export default function NewContactModel({closeModal}) {
-
     const nameRef=useRef()
     const {createContact}=useContacts()
     
@@ -13,7 +12,6 @@ export default function NewContactModel({closeModal}) {
         closeModal()
     }
 
-     
     return (
         <>
         <Modal.Header closeButton>Create Contact</Modal.Header>
@@ -24,8 +22,7 @@ export default function NewContactModel({closeModal}) {
                     <Form.Control type="text" ref={nameRef} required/>
                 </Form.Group>
                 <Button type="submit">Create</Button>
-            </Form>
-            
+            </Form>    
         </Modal.Body>
         </>
     )

@@ -1,6 +1,6 @@
-import React,{useRef} from 'react'
-import {Button, Container,Form} from 'react-bootstrap'
-import {v4 as uuidV4} from 'uuid'
+import React,{useRef} from 'react';
+import {Button, Container,Form} from 'react-bootstrap';
+import {v4 as uuidV4} from 'uuid';
 
 export default function Login({onIdSubmit}) {
     const idRef = useRef();
@@ -19,7 +19,6 @@ export default function Login({onIdSubmit}) {
                 <Form.Group>
                     <Form.Label>Enter your Id</Form.Label>
                     <Form.Control type="text" ref={idRef} required/>
-
                 </Form.Group>
                 <Button type="submit" className="mr-2">Login</Button>
                 <Button onClick={createNewId} variant="secondary">Create Id</Button>

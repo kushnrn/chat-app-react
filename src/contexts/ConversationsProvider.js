@@ -1,6 +1,6 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
-import { useContacts } from "./ContactsProvider";
+import { useContacts,  } from "./ContactsProvider";
 import useFetch from "../hooks/useFetch";
 
 const ConversationsContext = React.createContext();
@@ -13,18 +13,29 @@ export function ConversationsProvider({ id, children }) {
   const [conversations, setConversations] = useLocalStorage("conversations", []);
   const [selectedConversationIndex, setSelectedConversationIndex] = useState(0);
   const { contacts } = useContacts();
+  const CONVERSATIONS_KEY='conversations';
 
   function createConversation(recipients) {
-    setConversations((prevConversations) => {
-      return [...prevConversations, { recipients, messages: [] }];
-    });
+    console.log('recepients ' + recipients)
+
+    let conversationToOpenIndex = conversations.findIndex((conversation) => 
+      JSON.stringify(conversation.recipients) === JSON.stringify(recipients))
+      console.log('conversationToOpen ' + conversationToOpenIndex)
+
+    if (conversationToOpenIndex < 0) {
+      setConversations((prevConversations) => {
+        return [...prevConversations, { recipients, messages: [], date: Date.now()}]
+      });
+      conversationToOpenIndex = conversations.length;
+    }
+    setSelectedConversationIndex(conversationToOpenIndex)
   }
 
   const addMessageToConversation = useCallback(
     ({ recipients, text, sender }) => {
       setConversations((prevConversations) => {
         let madeChange = false;
-        const newMessage = { sender, text };
+        const newMessage = { sender, text, date: Date.now() };
         const newConversations = prevConversations.map((conversation) => {
           if (arrayEquality(conversation.recipients, recipients)) {
             madeChange = true;
@@ -55,7 +66,6 @@ export function ConversationsProvider({ id, children }) {
   const formattedConversations = conversations.map((conversation, index) => {
     const recipients = conversation.recipients.map((recipient) => {
       console.log("recipient to get" + recipient)
-
       const contact = contacts.find((contact) => {
         return contact.id === recipient;
       });
@@ -63,9 +73,7 @@ export function ConversationsProvider({ id, children }) {
       console.log("contact to get" + contact)
       const image = contact.avatar;
 
-      
       return { id: recipient, name, image };
-
     });
     console.log('receipeints', recipients, 'end')
 
@@ -77,7 +85,6 @@ export function ConversationsProvider({ id, children }) {
       const fromMe = id === message.sender;
       console.log('found contact: ' + contact)
       const senderAvatar = (contact && contact.avatar);
-
 
       return { ...message, senderName: name, fromMe, senderAvatar };
     });
@@ -92,6 +99,7 @@ export function ConversationsProvider({ id, children }) {
     selectConversationIndex: setSelectedConversationIndex,
     sendMessage,
     createConversation,
+    CONVERSATIONS_KEY
   };
 
   return (

@@ -3,7 +3,6 @@ import useLocalStorage from '../hooks/useLocalStorage';
 import { faker } from '@faker-js/faker';
 import {v4 as uuidV4} from 'uuid';
 
-
 const ContactsContext = React.createContext();
 
 export function useContacts() {
@@ -11,6 +10,8 @@ export function useContacts() {
 }
 
 export function ContactsProvider({children}) {
+    const CONTACTS_KEY='contacts';
+
     const [contacts, setContact] = useLocalStorage("contacts", 
         [...Array(20)].map(() => ({ 
             id: faker.datatype.uuid(),
@@ -28,7 +29,7 @@ export function ContactsProvider({children}) {
       const [searchText, setSearchText] = useState('');
 
     return (
-        <ContactsContext.Provider value ={{contacts, createContact, setSearchText, searchText}}>
+        <ContactsContext.Provider value ={{contacts, createContact, setSearchText, searchText, CONTACTS_KEY}}>
             {children}
         </ContactsContext.Provider>
     )
