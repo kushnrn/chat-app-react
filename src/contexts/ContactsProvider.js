@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import useLocalStorage from '../hooks/useLocalStorage';
 import { faker } from '@faker-js/faker';
-import {v4 as uuidV4} from 'uuid';
+import { v4 as uuidV4 } from 'uuid';
 
 const ContactsContext = React.createContext();
 

@@ -1,7 +1,6 @@
 import React, { useCallback, useContext, useState } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { useContacts,  } from "./ContactsProvider";
-import useFetch from "../hooks/useFetch";
 
 const ConversationsContext = React.createContext();
 
@@ -16,11 +15,8 @@ export function ConversationsProvider({ id, children }) {
   const CONVERSATIONS_KEY='conversations';
 
   function createConversation(recipients) {
-    console.log('recepients ' + recipients)
-
     let conversationToOpenIndex = conversations.findIndex((conversation) => 
       JSON.stringify(conversation.recipients) === JSON.stringify(recipients))
-      console.log('conversationToOpen ' + conversationToOpenIndex)
 
     if (conversationToOpenIndex < 0) {
       setConversations((prevConversations) => {
@@ -65,17 +61,14 @@ export function ConversationsProvider({ id, children }) {
 
   const formattedConversations = conversations.map((conversation, index) => {
     const recipients = conversation.recipients.map((recipient) => {
-      console.log("recipient to get" + recipient)
       const contact = contacts.find((contact) => {
         return contact.id === recipient;
       });
       const name = (contact && contact.name) || recipient;
-      console.log("contact to get" + contact)
       const image = contact.avatar;
 
       return { id: recipient, name, image };
     });
-    console.log('receipeints', recipients, 'end')
 
     const messages = conversation.messages.map((message) => {
       const contact = contacts.find((contact) => {
@@ -83,7 +76,6 @@ export function ConversationsProvider({ id, children }) {
       });
       const name = (contact && contact.name) || message.sender;
       const fromMe = id === message.sender;
-      console.log('found contact: ' + contact)
       const senderAvatar = (contact && contact.avatar);
 
       return { ...message, senderName: name, fromMe, senderAvatar };

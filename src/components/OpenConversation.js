@@ -11,7 +11,7 @@ export default function OpenConversation() {
         
     },[])
 
-    const { sendMessage, selectedConversation }=useConversations();
+    const { sendMessage, selectedConversation } = useConversations();
 
     let joke = useFetch('https://api.chucknorris.io/jokes/random');
 
@@ -24,14 +24,10 @@ export default function OpenConversation() {
         setTimeout(() => {
             sendMessage(selectedConversation.recipients.map(r=>r.id), joke.data.value, randomSender.id)
         }, 5000);
-
     }
 
     function parseTimestamp(timestamp){
         var current = new Date(timestamp );
-        // var hours = date.getHours();
-        // var minutes = "0" + date.getMinutes();
-        // var seconds = "0" + date.getSeconds();
         return `${current.getFullYear() + "-" + ("0"+(current.getMonth()+1)).slice(-2) +"-"+("0" + current.getDate()).slice(-2) + ", " + ("0" + current.getHours()).slice(-2) + ":" + ("0" + current.getMinutes()).slice(-2)}`;
     }
     return (

@@ -10,11 +10,11 @@ import { useConversations } from '../contexts/ConversationsProvider'
 
 
 export default function Sidebar({id}) {
-    const [ modalOpen,setModalOpen ]=useState(false);
+    const [modalOpen,setModalOpen] = useState(false);
     const { CONVERSATIONS_KEY } = useConversations();
-    const [ activeKey,setActiveKey ]=useState(CONVERSATIONS_KEY);
+    const [activeKey,setActiveKey] = useState(CONVERSATIONS_KEY);
     const ConversationIsOpen = activeKey === CONVERSATIONS_KEY;
-    const { searchText, setSearchText, CONTACTS_KEY } = useContacts();
+    const { CONTACTS_KEY } = useContacts();
 
     function closeModal(){
         setModalOpen(false)

@@ -4,18 +4,16 @@ import { FixedSizeList } from "react-window";
 import { useConversations } from '../contexts/ConversationsProvider';
 
 export default function Contacts({setActiveKey}) {
-    const {contacts, searchText, setSearchText} = useContacts();
-    const { createConversation, selectConversationIndex, CONVERSATIONS_KEY, conversations } = useConversations();
-
+    const { contacts, searchText } = useContacts();
+    const { createConversation, CONVERSATIONS_KEY } = useConversations();
     let result;
-      if(searchText) {
-        result = contacts.filter((contact)=> contact.name.includes(searchText))
-      }
-      else {
-        result = contacts;
-      }
-    console.log('result', result);
-    console.log('seacrh', searchText)
+
+    if(searchText) {
+      result = contacts.filter((contact)=> contact.name.includes(searchText))
+    }
+    else {
+      result = contacts;
+    }
 
     const renderRow = ({ index, style }) => (
         <button
