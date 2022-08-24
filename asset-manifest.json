@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/chat-app-react/static/css/main.84015ef0.css",
-    "main.js": "/chat-app-react/static/js/main.f2965a14.js",
+    "main.js": "/chat-app-react/static/js/main.9c077106.js",
     "index.html": "/chat-app-react/index.html",
     "main.84015ef0.css.map": "/chat-app-react/static/css/main.84015ef0.css.map",
-    "main.f2965a14.js.map": "/chat-app-react/static/js/main.f2965a14.js.map"
+    "main.9c077106.js.map": "/chat-app-react/static/js/main.9c077106.js.map"
   },
   "entrypoints": [
     "static/css/main.84015ef0.css",
-    "static/js/main.f2965a14.js"
+    "static/js/main.9c077106.js"
   ]
 }
