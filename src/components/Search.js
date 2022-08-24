@@ -5,10 +5,11 @@ import { useContacts } from '../contexts/ContactsProvider';
 
 export default function Search() {
     const { searchText, setSearchText } = useContacts();
+    console.log('search in Search', searchText)
 
     return (
         <div className="input-group rounded">
-            <input onChange = {event => setSearchText(event.target.value)}  type="search" className="form-control rounded" placeholder="Search or start new chat" aria-label="Search" aria-describedby="search-addon" />
+            <input onChange = {event => {setSearchText(event.target.value); console.log('event', event.target.value)}} type="search" className="form-control rounded" placeholder="Search or start new chat" aria-label="Search" aria-describedby="search-addon" />
             <span className="input-group-text border-0" id="search-addon">
             <FontAwesomeIcon icon={faSearch} />
             </span>

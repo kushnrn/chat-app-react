@@ -11,9 +11,10 @@ const CONVERSATIONS_KEY='conversations'
 const CONTACTS_KEY='contacts'
 
 export default function Sidebar({id}) {
-    const [activeKey,setActiveKey]=useState(CONVERSATIONS_KEY)
-    const [modalOpen,setModalOpen]=useState(false)
-    const ConversationIsOpen=activeKey===CONVERSATIONS_KEY
+    const [activeKey,setActiveKey]=useState(CONVERSATIONS_KEY);
+    const [modalOpen,setModalOpen]=useState(false);
+    const ConversationIsOpen=activeKey===CONVERSATIONS_KEY;
+    
     const { searchText, setSearchText } = useContacts();
 
     if(searchText && activeKey!= CONTACTS_KEY)  {
@@ -24,12 +25,14 @@ export default function Sidebar({id}) {
         setModalOpen(false)
     }
     return (
-        <div style={{width:'400px',minWidth:'250px'}} className='d-flex flex-column'>
+        <div style={{width:'400px',minWidth:'250px'}} className='d-flex flex-column mb-2'>
         <Search />
             <Tab.Container activeKey={activeKey} onSelect={setActiveKey}>
                 <Nav variant="tabs" className="Justify-content-center">
                     <Nav.Item>
-                        <Nav.Link eventKey={CONVERSATIONS_KEY} onClick={setSearchText('')}>Conversations</Nav.Link>
+                        <Nav.Link eventKey={CONVERSATIONS_KEY} 
+                        // onClick={setSearchText('')}
+                        >Conversations</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                         <Nav.Link eventKey={CONTACTS_KEY}>Contacts</Nav.Link>

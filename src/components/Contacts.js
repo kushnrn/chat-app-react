@@ -4,8 +4,9 @@ import { FixedSizeList } from "react-window";
 
 export default function Contacts() {
 
-    const {contacts} = useContacts();
+    const {contacts, searchText, setSearchText} = useContacts();
 
+    let result;
     const renderRow = ({ index, style }) => (
         <div style={{ ...style, ...{ display: "flex" } }}>
           <img
@@ -17,10 +18,16 @@ export default function Contacts() {
             {contacts[index].name}
           </p>
     </div> );
+
+    if(searchText) {
+       result = contacts.filter((contact)=> contact.name.includes(searchText))
+    }
+    console.log('result', result);
+    console.log('seacrh', searchText)
     return ( <FixedSizeList
           height={window.innerHeight}
           width={window.innerWidth - 20}
-          itemCount={contacts.length}
+          itemCount={searchText ? result.length : contacts.length}
           itemSize={58}
     >
           {renderRow}
